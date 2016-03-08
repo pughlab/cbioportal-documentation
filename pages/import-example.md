@@ -73,8 +73,7 @@ We need to declare some information about any additional clinical attributes we 
  * a `type` (typically `STRING` or `NUMBER`)
  * a `label` (which *must* be either `PATIENT` or `SAMPLE` and is used to decide whether it's a patient-specific or a sample-specific value)
  * a `header` (for the import column name)
- * a `count` (almost always one).
-
+ * a `count` (almost always one)
 
     clinical_file: ''
 

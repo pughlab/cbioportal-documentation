@@ -2,6 +2,8 @@
 layout: default
 ---
 
+### [Home](../)
+
 # Deployment Guide
 
 ## Table of contents

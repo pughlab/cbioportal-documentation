@@ -4,7 +4,7 @@ layout: default
 
 ### [Deployment Guide](deployment-guide.html)
 
-## Authentication and authorization
+## 1. Authentication and authorization
 
 cBioPortal uses Spring Security for its authentication system. At UHN, we use an OpenID Connect (OIDC) authentication system instead of direct use of LDAP. This is because UHN is slowly moving towards a single sign-on system based on OIDC. Although an institution-wide service doesn't yet exist, we have deployed an OIDC provider which is backed by LDAP/Active Directory servers on both the SIMS and RIS networks. When an institution-wide service is available, we'll need to reconfigure the OIDC secrets and URLs to work with that, but nothing else should need to change.
 

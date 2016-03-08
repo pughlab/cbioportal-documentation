@@ -2,6 +2,8 @@
 layout: default
 ---
 
+### [Home](../)
+
 # Developer guide
 
 ## Tools required

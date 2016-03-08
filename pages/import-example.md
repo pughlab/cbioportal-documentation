@@ -75,6 +75,8 @@ We need to declare some information about any additional clinical attributes we 
  * a `header` (for the import column name)
  * a `count` (almost always one)
 
+<!-- end the list -->
+
     clinical_file: ''
 
 A pointer to a clinical data file, or the empty string if there isn't one.
@@ -90,6 +92,8 @@ A pointer to a clinical data file, or the empty string if there isn't one.
 
 General values for the whole cancer study. This is used to make all the stable identifiers and the metadata for all different data files.
 
+Next, we add some case lists. These allow sets of samples to be explored through the web front end.
+
     case_lists:
       all:
         name: 'All'
@@ -98,11 +102,27 @@ General values for the whole cancer study. This is used to make all the stable i
           union:
             - 'exome'
             - 'targeted'
+
+Our first case set consists of all the samples. The settings are as follows:
+
+ * the `name` of the case set
+ * the `description` for the case set
+ * the `data` -- this can either be a source name (the key from the `sources` property above) or, as in this case, an object with a `union` name, which then merges samples from several sources.
+
+ <!-- end the list -->
+
       exome:
         name: 'Exome'
         description: 'Exome'
         data: 'exome'
+
+This is a simpler case set, consisting only of the exome samples.
+
       targeted:
         name: 'Targeted'
         description: 'Targeted'
         data: 'targeted'
+
+And these are only the targeted samples.
+
+If you use this to analyze all the data, you'll get a complete data package that is easy to load into cBioPortal at UHN.

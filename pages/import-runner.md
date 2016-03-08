@@ -91,3 +91,60 @@ Response Code : 200
 ```
 
 You'll likely need to restart the server for the study to show up (this is a caching issue that we are working on).
+
+## The Spring context file for importing
+
+As we mentioned, the import runner uses a fixed Spring context file to set the database settings. It looks like this:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xmlns:context="http://www.springframework.org/schema/context"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+	    <property name="staticMethod" value="org.mskcc.cbio.portal.dao.JdbcUtil.setDataSource"/>
+	    <property name="arguments">
+	        <list>
+	            <ref bean="businessDataSource"/>
+	        </list>
+	   </property>
+	</bean>
+
+	<bean id="businessDataSource" class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy">
+         <constructor-arg ref="dbcpDataSource"/>
+    </bean>
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    	<property name="dataSource" ref="businessDataSource"/>
+	</bean>
+
+	<bean id="scriptTransactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager" />
+	    <property name="isolationLevelName" value="ISOLATION_DEFAULT"/>
+	</bean>
+
+	<bean id="dbcpDataSource" destroy-method="close"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/xxx?sessionVariables=sql_mode=ansi" />
+		<property name="username" value="xxx" />
+		<property name="password" value="xxx" />
+		<property name="minIdle" value="0" />
+		<property name="maxIdle" value="10" />
+		<property name="maxActive" value="100" />
+		<property name="poolPreparedStatements" value="true" />
+	</bean>
+
+	<bean id="url" class="org.mskcc.cbio.portal.ImportWrapper">
+    		<property name="url" value="http://cbioportal.example.com/reload_server_cache.do" />
+	</bean>
+
+</beans>
+```

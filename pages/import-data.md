@@ -29,4 +29,4 @@ cBioPortal expects a very specific set of files for importing. Its directory str
 
 We'll come back to the formats of the data files later. All the meta files, and the case lists, have a vaguely "MIME-like" key/value format.
 
-However, we don't want you to worry about any of this nonsense, so at UHN we use a [wrapper tool](https://github.com/pughlab/import_wrapper) which translates pipeline data into the right format.
+However, we don't want you to worry about any of this nonsense, so at UHN we use a [wrapper tool](import-wrapper.html) which translates pipeline data into the right format.

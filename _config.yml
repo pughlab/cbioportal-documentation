@@ -5,7 +5,7 @@ description: > # this means to ignore newlines until "baseurl:"
   This describes the local deployment of cBioPortal at UHN. That includes
   both the web application, along with the deployment framework (which is a
   little different to the public/MSK versions) and the import processes.
-baseurl: "/cbioportal" # the subpath of your site, e.g. /blog/
+baseurl: "/cbioportal-documentation" # the subpath of your site, e.g. /blog/
 url: "http://pughlab.github.io" # the base hostname & protocol for your site
 twitter_username: morungos
 github_username:  morungos

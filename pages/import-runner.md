@@ -8,6 +8,8 @@ layout: default
 
 Unlike the upstream cBioPortal, UHN uses a simple Java-based runner that allows an entire import process to be run in a single transaction. This means that any errors in the import process leave the application in a consistent state. This reduces the burden on those who import data, as they don't need to worry about repairing data if they import data that is broken.
 
+This is a departure from the public site, that uses a large set of Python wrapper scripts. Because each uses a separate database connection, these are not transactional, so a break in one leaves the database at risk of inconsistency. Since most of these Python only invoke a `main` method in a given Java class, the import runner generates a single script that runs all these `main` methods within a single transaction. 
+
 ## Using the import runner
 
 The cBioPortal at UHN import runner is a simple Java application, which runs from the command line as follows:
